@@ -8,11 +8,39 @@ import org.junit.Before
 import org.junit.Test
 
 class AppTest {
-    @Test fun testAppHasAGreeting() {
-        val app = App()
-        app.let{
-            assertThat(it.greeting).isEqualTo("Hello world")
+    @Test fun testクラブの3が生成されること(){
+        Card("♣", "3").let{
+            assertThat(it.toString()).isEqualTo("3♣")
         }
-        
+    }
+
+    class CardComparisonTest{
+        val spadeThree = Card("♠", "3")
+        val aceOfSpades = Card("♠", "A")
+        val aceOfHearts = Card("♥", "A")
+        @Test fun testスペードの3とスペードのAは同じスートを持つこと(){
+            spadeThree.let{
+                assertThat(it.hasSameSuit(aceOfSpades))
+                .isTrue()
+            }
+        }
+        @Test fun testスペードの3とハートのAは異なるスートを持つこと(){
+            spadeThree.let{
+                assertThat(it.hasSameSuit(aceOfHearts))
+                .isFalse()
+            }
+        }
+        @Test fun testスペードの3とスペードのAは異なるランクを持つこと(){
+            spadeThree.let{
+                assertThat(it.hasSameRank(aceOfHearts))
+                .isFalse()
+            }
+        }
+        @Test fun testスペードのAとハートのAは同じランクを持つ(){
+            aceOfSpades.let{
+                assertThat(it.hasSameRank(aceOfHearts))
+                .isTrue()
+            }
+        }
     }
 }

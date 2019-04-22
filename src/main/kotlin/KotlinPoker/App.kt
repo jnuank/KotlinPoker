@@ -3,11 +3,10 @@
  */
 package KotlinPoker
 
-class App {
-    val greeting: String = "Hello world."
-        
-}
+data class Card(val suit: String, val rank : String){
+    override fun toString() = "${rank}${suit}"
 
-fun main(args: Array<String>) {
-    println(App().greeting)
+    fun hasSameSuit(other : Card) = suit == other.suit
+
+    fun hasSameRank(other : Card) = rank == other.rank
 }
