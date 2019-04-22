@@ -3,12 +3,16 @@
  */
 package KotlinPoker
 
-import kotlin.test.Test
-import kotlin.test.assertNotNull
+import org.assertj.core.api.Assertions.*
+import org.junit.Before
+import org.junit.Test
 
 class AppTest {
     @Test fun testAppHasAGreeting() {
-        val classUnderTest = App()
-        assertNotNull(classUnderTest.greeting, "app should have a greeting")
+        val app = App()
+        app.let{
+            assertThat(it.greeting).isEqualTo("Hello world")
+        }
+        
     }
 }

@@ -4,10 +4,8 @@
 package KotlinPoker
 
 class App {
-    val greeting: String
-        get() {
-            return "Hello world."
-        }
+    val greeting: String = "Hello world."
+        
 }
 
 fun main(args: Array<String>) {
