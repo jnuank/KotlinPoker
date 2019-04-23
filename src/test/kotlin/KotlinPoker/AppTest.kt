@@ -43,4 +43,18 @@ class AppTest {
             }
         }
     }
+
+    // 課題2
+    class TwoCardPorker{
+        val kingOfDia = Card("◆", "K")
+        val nineOfDia = Card("◆", "9")
+        val cards = Cards(mutableListOf(kingOfDia, nineOfDia))
+        
+        @Test fun testダイヤのペアと判定されること(){
+            cards.let{
+                assertThat(it.isPair())
+                .isTrue()
+            }            
+        }
+    }
 }
