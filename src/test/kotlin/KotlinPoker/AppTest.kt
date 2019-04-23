@@ -46,71 +46,33 @@ class AppTest {
 
     // 課題2
     class TwoCardPorker{
-        @Test fun testペアと判定されること(){
+        @Test fun test役がペアになること(){
             val card1 = Card("◆", "9")
             val card2 = Card("◆", "9")
             val cards = Cards(mutableListOf(card1, card2))
-            
             cards.let{
-                assertThat(it.isPair())
-                .isTrue()
+                assertThat(it.getHand())
+                .isEqualTo("Pair")
             }            
         }
-        @Test fun testペアではないこと(){
-            val kingOfDia = Card("◆", "K")
-            val twoOfHeart = Card("♥", "2")
-            val cards = Cards(mutableListOf(kingOfDia, twoOfHeart))
+        @Test fun test役がフラッシュであること(){
+            val card1 = Card("◆", "K")
+            val card2 = Card("◆", "9")
+            val cards = Cards(mutableListOf(card1, card2))
             cards.let{
-                assertThat(it.isPair())
-                .isFalse()
-            }
-        }
-        @Test fun testフラッシュではないこと(){
-            val kingOfDia = Card("◆", "K")
-            val twoOfHeart = Card("♥", "2")
-            val cards = Cards(mutableListOf(kingOfDia, twoOfHeart))
-            cards.let{
-                assertThat(it.isFlush())
-                .isFalse()
-            }
-        }
-        @Test fun testフラッシュであること(){
-            val kingOfDia = Card("◆", "K")
-            val nineOfDia = Card("◆", "9")
-            val cards = Cards(mutableListOf(kingOfDia, nineOfDia))
-            cards.let{
-                assertThat(it.isFlush())
-                .isTrue()
+                assertThat(it.getHand())
+                .isEqualTo("Flush")
             }            
         }
         // ハイカード=ブタ
-        @Test fun testハイカードであること(){
-            val card1 = Card("♣", "4")
-            val card2 = Card("◆", "9")
+        @Test fun test役がハイカードであること(){
+            val card1 = Card("◆", "K")
+            val card2 = Card("♥", "2")
             val cards = Cards(mutableListOf(card1, card2))
-            
             cards.let{
-                assertThat(it.isHighCard())
-                .isTrue()
-            }            
-        }
-        @Test fun testハイカードでないこと(){
-            val card1 = Card("◆", "4")
-            val card2 = Card("◆", "9")
-            val cards = Cards(mutableListOf(card1, card2))
-            
-            cards.let{
-                assertThat(it.isHighCard())
-                .isFalse()
+                assertThat(it.getHand())
+                .isEqualTo("HighCard")
             }
-
-            val card3 = Card("♠", "4")
-            val cardsOther = Cards(mutableListOf(card1,card3))
-
-            cardsOther.let{
-                assertThat(it.isHighCard())
-                .isFalse()
-            }            
         }
     }
 }

@@ -12,14 +12,9 @@ data class Card(val suit: String, val rank : String){
 }
 
 data class Cards(val cards: List<Card>){
-    fun isPair() : Boolean {
-        return cards[0].rank == cards[1].rank
-    }
-    fun isFlush() : Boolean {
-        return cards[0].suit == cards[1].suit
-    }
-    fun isHighCard() : Boolean {
-        return cards[0].suit != cards[1].suit
-                && cards[0].rank != cards[1].rank
+    fun getHand() : String = when  {
+        cards[0].rank == cards[1].rank -> "Pair"
+        cards[0].suit == cards[1].suit -> "Flush"
+        else -> "HighCard"
     }
 }
