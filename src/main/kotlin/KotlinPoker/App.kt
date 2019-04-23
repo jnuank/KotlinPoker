@@ -4,11 +4,31 @@
 package KotlinPoker
 
 data class Card(val suit: String, val rank : String){
+    init{
+        require(
+            rank == "A"
+            || rank == "J"
+            || rank == "Q"
+            || rank == "K"
+            || Integer.parseInt(rank) >= 2
+            || Integer.parseInt(rank) <= 10
+        ){"Rankを正しいもので指定して下さい"}
+
+        require(
+            suit == "♣"
+            || suit == "♠"
+            || suit == "♥"
+            || suit == "◆"
+        ){"Suitを正しいもので指定して下さい"}
+    }
+
     override fun toString() = "${rank}${suit}"
 
     fun hasSameSuit(other : Card) = suit == other.suit
 
     fun hasSameRank(other : Card) = rank == other.rank
+
+
 }
 
 data class Cards(val cards: List<Card>){
