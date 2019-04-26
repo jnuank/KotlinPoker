@@ -9,15 +9,15 @@ import org.junit.Test
 
 class AppTest {
     @Test fun testクラブの3が生成されること(){
-        Card("♣", "3").let{
+        Card(Suit.CLUB, Rank.THREE).let{
             assertThat(it.toString()).isEqualTo("3♣")
         }
     }
 
     class CardComparisonTest{
-        val spadeThree = Card("♠", "3")
-        val aceOfSpades = Card("♠", "A")
-        val aceOfHearts = Card("♥", "A")
+        val spadeThree = Card(Suit.SPADE, Rank.THREE)
+        val aceOfSpades = Card(Suit.SPADE, Rank.ACE)
+        val aceOfHearts = Card(Suit.HEART, Rank.ACE)
         @Test fun testスペードの3とスペードのAは同じスートを持つこと(){
             spadeThree.let{
                 assertThat(it.hasSameSuit(aceOfSpades))
@@ -47,8 +47,8 @@ class AppTest {
     // 課題2
     class TwoCardPorker{
         @Test fun test役がペアになること(){
-            val card1 = Card("◆", "9")
-            val card2 = Card("◆", "9")
+            val card1 = Card(Suit.DIA, Rank.NINE)
+            val card2 = Card(Suit.DIA, Rank.NINE)
             val cards = Cards(mutableListOf(card1, card2))
             cards.let{
                 assertThat(it.getHand())
@@ -56,18 +56,19 @@ class AppTest {
             }            
         }
         @Test fun test役がフラッシュであること(){
-            val card1 = Card("◆", "K")
-            val card2 = Card("◆", "9")
+            val card1 = Card(Suit.DIA, Rank.KING)
+            val card2 = Card(Suit.DIA, Rank.NINE)
             val cards = Cards(mutableListOf(card1, card2))
             cards.let{
                 assertThat(it.getHand())
                 .isEqualTo("Flush")
             }            
         }
+
         // ハイカード=ブタ
         @Test fun test役がハイカードであること(){
-            val card1 = Card("◆", "K")
-            val card2 = Card("♥", "2")
+            val card1 = Card(Suit.DIA, Rank.KING)
+            val card2 = Card(Suit.HEART, Rank.TWO)
             val cards = Cards(mutableListOf(card1, card2))
             cards.let{
                 assertThat(it.getHand())

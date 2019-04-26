@@ -3,32 +3,12 @@
  */
 package KotlinPoker
 
-data class Card(val suit: String, val rank : String){
-    init{
-        require(
-            rank == "A"
-            || rank == "J"
-            || rank == "Q"
-            || rank == "K"
-            || Integer.parseInt(rank) >= 2
-            || Integer.parseInt(rank) <= 10
-        ){"Rankを正しいもので指定して下さい"}
-
-        require(
-            suit == "♣"
-            || suit == "♠"
-            || suit == "♥"
-            || suit == "◆"
-        ){"Suitを正しいもので指定して下さい"}
-    }
-
-    override fun toString() = "${rank}${suit}"
+data class Card(val suit: Suit, val rank : Rank){
+    override fun toString() = "${rank.value}${suit.value}"
 
     fun hasSameSuit(other : Card) = suit == other.suit
 
     fun hasSameRank(other : Card) = rank == other.rank
-
-
 }
 
 data class Cards(val cards: List<Card>){
@@ -38,3 +18,29 @@ data class Cards(val cards: List<Card>){
         else -> "HighCard"
     }
 }
+
+enum class Rank(val value : Int){
+    ACE(1),
+    TWO(2),
+    THREE(3),
+    FOUR(4),
+    FIVE(5),
+    SIX(6),
+    SEVEN(7),
+    EIGHT(8),
+    NINE(9),
+    TEN(10),
+    JACK(11),
+    QUEEN(12),
+    KING(13)
+}
+enum class Suit(val value : String){
+    CLUB("♣"),
+    SPADE("♠"),
+    HEART("♥"),
+    DIA("◆")
+}
+
+
+
+
