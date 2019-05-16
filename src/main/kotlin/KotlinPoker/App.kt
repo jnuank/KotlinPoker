@@ -9,6 +9,7 @@ data class Card(val suit: Suit, val rank : Rank){
     fun hasSameSuit(other : Card) = suit == other.suit
 
     fun hasSameRank(other : Card) = rank == other.rank
+
 }
 
 data class Cards(val cards: List<Card>){
@@ -16,6 +17,12 @@ data class Cards(val cards: List<Card>){
         cards[0].rank == cards[1].rank -> "Pair"
         cards[0].suit == cards[1].suit -> "Flush"
         else -> "HighCard"
+    }
+
+    fun isLinerRank() : Boolean = when {
+        cards[0].rank == Rank.ACE && cards[1].rank == Rank.KING -> true
+        cards[0].rank == Rank.KING && cards[1].rank == Rank.ACE -> true
+        else -> Math.abs(cards[0].rank.value - cards[1].rank.value) == 1
     }
 }
 
@@ -32,7 +39,7 @@ enum class Rank(val value : Int){
     TEN(10),
     JACK(11),
     QUEEN(12),
-    KING(13)
+    KING(13);
 }
 enum class Suit(val value : String){
     CLUB("♣"),

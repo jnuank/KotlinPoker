@@ -13,6 +13,17 @@ class AppTest {
             assertThat(it.toString()).isEqualTo("3♣")
         }
     }
+    @Test fun 同値比較(){
+        Card(Suit.SPADE, Rank.FOUR).let{
+            assertThat(it).isEqualTo(Card(Suit.SPADE, Rank.FOUR))
+        }
+        Card(Suit.DIA, Rank.FOUR).let{
+            assertThat(it).isNotEqualTo(Card(Suit.SPADE, Rank.FOUR))
+        }
+        Card(Suit.SPADE, Rank.JACK).let{
+            assertThat(it).isNotEqualTo(Card(Suit.SPADE, Rank.FOUR))
+        }        
+    }
 
     class CardComparisonTest{
         val spadeThree = Card(Suit.SPADE, Rank.THREE)
@@ -75,5 +86,24 @@ class AppTest {
                 .isEqualTo("HighCard")
             }
         }
+
+        @Test fun LinerRankで連続したランクか確認できること1(){
+            val card1 = Card(Suit.DIA, Rank.KING)
+            val card2 = Card(Suit.HEART, Rank.ACE)
+            val cards = Cards(mutableListOf(card1, card2))
+            cards.let{
+                assertThat(it.isLinerRank())
+                .isTrue()
+            }
+        }
+        @Test fun LinerRankで連続したランクか確認できること2(){
+            val card1 = Card(Suit.DIA, Rank.TWO)
+            val card2 = Card(Suit.HEART, Rank.THREE)
+            val cards = Cards(mutableListOf(card1, card2))
+            cards.let{
+                assertThat(it.isLinerRank())
+                .isTrue()
+            }
+        }        
     }
 }
