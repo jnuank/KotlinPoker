@@ -14,10 +14,15 @@ data class Card(val suit: Suit, val rank : Rank){
 
 data class Cards(val cards: List<Card>){
     fun getHand() : String = when  {
-        cards[0].rank == cards[1].rank -> "Pair"
-        cards[0].suit == cards[1].suit -> "Flush"
+        this.isLinerRank() && this.isFlush() -> "StraightFlush"
+        this.isLinerRank() -> "Straight"
+        this.isPair() -> "Pair"
+        this.isFlush() -> "Flush"
         else -> "HighCard"
     }
+
+    fun isPair()  : Boolean = cards[0].hasSameRank(cards[1])
+    fun isFlush() : Boolean = cards[0].hasSameSuit(cards[1])
 
     fun isLinerRank() : Boolean = when {
         cards[0].rank == Rank.ACE && cards[1].rank == Rank.KING -> true

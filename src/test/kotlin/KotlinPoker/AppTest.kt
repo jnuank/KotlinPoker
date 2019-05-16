@@ -57,6 +57,16 @@ class AppTest {
 
     // 課題2
     class TwoCardPorker{
+        @Test fun test役がストレートフラッシュであること(){
+            val card1 = Card(Suit.HEART, Rank.TWO)
+            val card2 = Card(Suit.HEART, Rank.ACE)
+            val cards = Cards(mutableListOf(card1, card2))
+            cards.let{
+                assertThat(it.getHand())
+                .isEqualTo("StraightFlush")
+            }
+        }
+
         @Test fun test役がペアになること(){
             val card1 = Card(Suit.DIA, Rank.NINE)
             val card2 = Card(Suit.DIA, Rank.NINE)
@@ -66,6 +76,17 @@ class AppTest {
                 .isEqualTo("Pair")
             }            
         }
+
+        @Test fun test役がストレートであること(){
+            val card1 = Card(Suit.HEART, Rank.KING)
+            val card2 = Card(Suit.DIA, Rank.ACE)
+            val cards = Cards(mutableListOf(card1, card2))
+            cards.let{
+                assertThat(it.getHand())
+                .isEqualTo("Straight")
+            }
+        }
+
         @Test fun test役がフラッシュであること(){
             val card1 = Card(Suit.DIA, Rank.KING)
             val card2 = Card(Suit.DIA, Rank.NINE)
@@ -86,24 +107,5 @@ class AppTest {
                 .isEqualTo("HighCard")
             }
         }
-
-        @Test fun LinerRankで連続したランクか確認できること1(){
-            val card1 = Card(Suit.DIA, Rank.KING)
-            val card2 = Card(Suit.HEART, Rank.ACE)
-            val cards = Cards(mutableListOf(card1, card2))
-            cards.let{
-                assertThat(it.isLinerRank())
-                .isTrue()
-            }
-        }
-        @Test fun LinerRankで連続したランクか確認できること2(){
-            val card1 = Card(Suit.DIA, Rank.TWO)
-            val card2 = Card(Suit.HEART, Rank.THREE)
-            val cards = Cards(mutableListOf(card1, card2))
-            cards.let{
-                assertThat(it.isLinerRank())
-                .isTrue()
-            }
-        }        
     }
 }
